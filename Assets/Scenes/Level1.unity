@@ -1172,27 +1172,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4088507fcccc38c4fae18cca34b0c1d8, type: 3}
---- !u!1 &1170570944 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4929584073299230367, guid: bee1f3c5268c99442a8451ef8ca798a0, type: 3}
-  m_PrefabInstance: {fileID: 4929584072699778504}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1170570945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170570944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be4b7e482d96ba945b4c05f8b898b505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  runSprites: []
-  climbSprite: {fileID: 0}
-  moveSpeed: 1
-  jumpStrength: 1
 --- !u!1 &1176984251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,7 +2062,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2146994688}
   - component: {fileID: 2146994689}
-  - component: {fileID: 2146994690}
   m_Layer: 0
   m_Name: Barrel Spawner
   m_TagString: Untagged
@@ -2119,21 +2097,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2158710608520639940, guid: 05d493a2873141d43a9de2e629d49dec, type: 3}
-  minTime: 2
-  maxTime: 4
---- !u!114 &2146994690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146994687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e76d3e5eade7154683379bc21ca9a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
   minTime: 2
   maxTime: 4
 --- !u!1001 &1019850079351067984
@@ -2333,10 +2296,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4929584073299230367, guid: bee1f3c5268c99442a8451ef8ca798a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1170570945}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bee1f3c5268c99442a8451ef8ca798a0, type: 3}
 --- !u!1001 &7460934568477382871
 PrefabInstance:
