@@ -64,7 +64,10 @@
 **6. Did you get help from any online websites, videos, or tutorials?**   
 
 > &nbsp;
-><i>(link them here)</i>   
+><i>https://www.mariouniverse.com/sprites-nes-dk/</i>
+><i>https://github.com/zigurous/unity-donkey-kong-tutorial.git</i>
+><i>https://reddit.com/r/Unity2D/comments/8y75vq/how_do_i_extract_multiple_sprites_from_these/</i>
+><i>https://docs.unity3d.com/6000.2/Documentation/Manual/sprite/sprite-editor/sprite-editor-landing.html</i>   
 > &nbsp;
  
 

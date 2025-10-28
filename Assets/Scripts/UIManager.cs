@@ -1,5 +1,3 @@
-//old ui manager
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject mainMenuPanel;
     public GameObject pauseMenuPanel;
+    public GameObject gameOverPanel;
 
     private bool isPaused = false;
     private void Start()
@@ -27,6 +26,15 @@ public class UIManager : MonoBehaviour
                 PauseGame();
             }
         }
+    }
+    public void ShowGameOver()
+    {
+        mainMenuPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
+
+        gameOverPanel.SetActive(true);
+
+        Time.timeScale = 0f;
     }
 
     public void ShowMainMenu()
@@ -51,6 +59,21 @@ public class UIManager : MonoBehaviour
         isPaused = false;
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+    public void RetryGame()
+    {
+        gameOverPanel.SetActive(false);
+        Time.timeScale = 1f;
+        FindObjectOfType<GameManager>().RestartGame();
+    }
+    public void ExitToMainMenu()
+    {
+        gameOverPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
+
+        FindObjectOfType<GameManager>().ReturnToMainMenu();
+
+        ShowMainMenu();
     }
     public void ExitGame()
     {

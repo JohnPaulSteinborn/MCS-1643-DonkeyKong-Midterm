@@ -25,13 +25,18 @@ public class GameManager : MonoBehaviour
     public void LevelFailed()
     {
         lives--;
+
         if (lives <= 0)
         {
-            NewGame();
+            UIManager ui = FindObjectOfType<UIManager>();
+            if (ui != null)
+            {
+                ui.ShowGameOver();
+            }
         }
         else
         {
-            ReloadCurrentLevel();
+            LoadLevel(level);
         }
     }
 
@@ -75,9 +80,30 @@ public class GameManager : MonoBehaviour
         level = index;
         isLoading = false;
     }
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
 
+        if (SceneManager.sceneCount > 1)
+        {
+            Scene gameplayScene = SceneManager.GetSceneAt(1);
+            if (gameplayScene.isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(gameplayScene);
+            }
+        }
+
+        lives = 3;
+        scores = 0;
+    }
     private void ReloadCurrentLevel()
     {
         LoadLevel(level);
+    }
+    public void RestartGame()
+    {
+        lives = 3;
+        scores = 0;
+        LoadLevel(1);
     }
 }
