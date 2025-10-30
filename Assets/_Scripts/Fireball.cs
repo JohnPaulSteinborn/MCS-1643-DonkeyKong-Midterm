@@ -13,19 +13,20 @@ public class Fireball : MonoBehaviour
 
     public float moveSpeed = 1.0f;
     public float climbSpeed = 1.0f;
-    public float climbChance = 0.01f;
+    [Range(0f, 1f)] public float climbChance = 0.01f;
 
-    // new: track ladder top height
-    private float climbTargetY;
+    private float climbTargetY; // ladder top
+    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         results = new Collider2D[4];
         direction = Vector2.right;
 
-        // Prevent any physical blocking with ladder triggers
+        // Ignore ladder collisions so the fireball can overlap triggers
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ladder"), gameObject.layer, true);
     }
 
@@ -35,21 +36,22 @@ public class Fireball : MonoBehaviour
 
         if (climbing)
         {
-            // move upward until top of ladder
             rb.velocity = new Vector2(0, climbSpeed);
 
+            // Stop climbing once at or above ladder top
             if (transform.position.y >= climbTargetY)
             {
                 StopClimbing();
-                FlipDirection();  // choose a new horizontal direction
+                FlipDirection();
             }
         }
         else
         {
+            // Move horizontally while on ground or falling
             rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
 
-            // Random chance to start climbing if ladder available
-            if (canClimb && Random.value < climbChance)
+            // Occasionally decide to climb
+            if (canClimb && grounded && Random.value < climbChance)
             {
                 StartClimbing();
             }
@@ -88,16 +90,19 @@ public class Fireball : MonoBehaviour
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
 
-        // find the ladder directly underneath or overlapping
+        // Disable collision with ground while climbing
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ground"), gameObject.layer, true);
+
+        // Snap to center of the ladder
         Collider2D ladder = Physics2D.OverlapBox(transform.position, col.bounds.size, 0f, 1 << LayerMask.NameToLayer("Ladder"));
         if (ladder != null)
         {
             Bounds b = ladder.bounds;
-            climbTargetY = b.max.y; // top edge of the ladder
+            climbTargetY = b.max.y;
+            transform.position = new Vector2(ladder.bounds.center.x, transform.position.y);
         }
         else
         {
-            // fallback: climb a fixed amount if we can’t detect a ladder top
             climbTargetY = transform.position.y + 2.0f;
         }
     }
@@ -106,16 +111,32 @@ public class Fireball : MonoBehaviour
     {
         climbing = false;
         rb.gravityScale = 1;
+
+        // Slightly nudge the fireball above the top of the ladder/platform
+        transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
+
+        // Re-enable ground collision after a short delay (one frame)
+        StartCoroutine(ReenableGroundCollisionNextFrame());
+    }
+
+    // Coroutine to ensure physics updates before re-enabling collision
+    private System.Collections.IEnumerator ReenableGroundCollisionNextFrame()
+    {
+        yield return null; // wait one frame
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ground"), gameObject.layer, false);
     }
 
     private void FlipDirection()
     {
         direction.x *= -1;
+        transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        // Reverse direction if hitting walls or obstacles
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") ||
+            collision.gameObject.CompareTag("Obstacle"))
         {
             FlipDirection();
         }
@@ -124,7 +145,7 @@ public class Fireball : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (col == null) return;
-        Gizmos.color = Color.yellow;
+        Gizmos.color = climbing ? Color.yellow : Color.cyan;
         Vector2 size = col.bounds.size;
         size.y += 0.1f;
         size.x /= 2f;

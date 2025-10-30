@@ -43,6 +43,9 @@
 ><i>https://www.mariouniverse.com/sprites-nes-dk/ for sprites</i>
 ><i>https://github.com/zigurous/unity-donkey-kong-tutorial.git for sprites</i>
 ><i>https://sfxr.me/ for sound effects</i>
+><i>Music: Bensound</i>
+><i>License code: MU9GGUDHYFODHDMR</i>
+><i>Artist: : Lunar Years</i>
 > &nbsp;
  
 
@@ -58,7 +61,7 @@
 **5. Did you get help from any AI Code Assistants?**   
 
 > &nbsp;
-><i>Used ChatGPT for help with writing the script for the Fireball enemies as well as the UIManager. In doing so I learned how to implement enemy movement and some behavior regarding interacting with game objects. The UIManager taught me how to properly implement menus and restart and reset the game upon a game over.</i>   
+><i>Used ChatGPT for help with writing the script for the Fireball enemies as well as the UIManager. In doing so I learned how to implement enemy movement and some behavior regarding interacting with game objects. The fireball scripting helped me figure out how to let the fireballs climb ladders, which was probably what I struggled the most with implementing. The UIManager taught me how to properly implement menus and restart and reset the game upon a game over.</i>   
 > &nbsp;
  
 
@@ -76,7 +79,7 @@
 **7. What trouble did you have with this project?**   
 
 > &nbsp;
-><i>(Even if you didn't complete the project, you can still get partial credit if you tell us about why it's incomplete.)</i>   
+><i>I was unable to properly implement scripting that awarded points when jumping over a barrel, I couldn't get the scripting to consistently detect when a barrel had been jumped over so I opted to remove it entirely.</i>   
 > &nbsp;
  
 
