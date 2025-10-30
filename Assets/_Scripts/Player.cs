@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 public class Player : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
@@ -17,11 +19,14 @@ public class Player : MonoBehaviour
 
     private bool grounded;
     private bool climbing;
+
+    private AudioSource audioSrc;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        audioSrc = GetComponentInChildren<AudioSource>();
         results = new Collider2D[4];
     }
     private void OnEnable()
@@ -68,7 +73,11 @@ public class Player : MonoBehaviour
         else if (grounded && Input.GetButtonDown("Jump"))
         {
             direction = Vector2.up * jumpStrength;
-        } 
+            if (audioSrc != null)
+            {
+                audioSrc.Play();
+            }
+        }
         else
         {
             direction += Physics2D.gravity * Time.deltaTime;
@@ -82,7 +91,7 @@ public class Player : MonoBehaviour
         if (direction.x > 0)
         {
             transform.eulerAngles = Vector3.zero;
-        } 
+        }
         else if (direction.x < 0f)
         {
             transform.eulerAngles = new Vector3(0f, 180.0f, 0f);
@@ -112,7 +121,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Objective"))
+        if (collision.gameObject.CompareTag("Objective"))
         {
             enabled = false;
             FindObjectOfType<GameManager>().LevelComplete();
@@ -123,4 +132,5 @@ public class Player : MonoBehaviour
             FindObjectOfType<GameManager>().LevelFailed();
         }
     }
+
 }

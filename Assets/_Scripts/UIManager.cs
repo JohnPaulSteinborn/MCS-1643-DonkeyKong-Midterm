@@ -47,6 +47,16 @@ public class UIManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         Time.timeScale = 1f;
+
+        GameManager gm = FindObjectOfType<GameManager>();
+        if (gm != null)
+        {
+            gm.StartNewGame();
+        }
+        else
+        {
+            Debug.LogWarning("GameManager not found!");
+        }
     }
     public void PauseGame()
     {

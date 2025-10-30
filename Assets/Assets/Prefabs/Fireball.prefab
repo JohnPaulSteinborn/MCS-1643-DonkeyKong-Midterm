@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1606659553909961931}
   - component: {fileID: 5121319654898514024}
   - component: {fileID: -4995262131342025563}
-  - component: {fileID: -1194705252946240846}
+  - component: {fileID: 6835770982969737647}
   - component: {fileID: -5550632879345029464}
   m_Layer: 9
   m_Name: Fireball
@@ -114,8 +114,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &-1194705252946240846
-BoxCollider2D:
+--- !u!58 &6835770982969737647
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,18 +147,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.0625, y: 0, z: 0.0625, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 2
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9375, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.4
 --- !u!114 &-5550632879345029464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,4 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d840755aaed71da4ead4bcb5352b35d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  moveSpeed: 2
+  climbSpeed: 1.5
+  climbChance: 0.01

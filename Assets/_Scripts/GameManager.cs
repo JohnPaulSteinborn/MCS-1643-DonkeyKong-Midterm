@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
     private int level;
     private int lives;
-    private int scores;
     private bool isLoading = false;
 
     private void Start()
@@ -18,7 +18,13 @@ public class GameManager : MonoBehaviour
     private void NewGame()
     {
         lives = 3;
-        scores = 0;
+        ScoreManager.ResetScore();
+        LoadLevel(1);
+    }
+    public void StartNewGame()
+    {
+        lives = 3;
+        ScoreManager.ResetScore();
         LoadLevel(1);
     }
 
@@ -42,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelComplete()
     {
-        scores += 1000;
+        ScoreManager.AddScore(1000);
 
         int nextLevel = level + 1;
 
@@ -94,7 +100,7 @@ public class GameManager : MonoBehaviour
         }
 
         lives = 3;
-        scores = 0;
+        ScoreManager.ResetScore();
     }
     private void ReloadCurrentLevel()
     {
@@ -103,7 +109,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         lives = 3;
-        scores = 0;
+        ScoreManager.ResetScore();
         LoadLevel(1);
     }
 }

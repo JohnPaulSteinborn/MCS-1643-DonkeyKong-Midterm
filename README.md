@@ -1,7 +1,7 @@
 #### MCS 1643 README file
-# **Replace this Project Name**
+# **Donkey Kong**
 
-#### Author: *Replace this with your name*
+#### Author: *John Paul Steinborn*
 
 ##### Modified: *2024-09-06*
 
@@ -40,7 +40,8 @@
 **3. Any assets used that you didn't create yourself?**   
 
 > &nbsp;
-><i>(art, music, etc. Just tell us where you got it, link it here)</i>   
+><i>https://www.mariouniverse.com/sprites-nes-dk/</i>
+><i>https://github.com/zigurous/unity-donkey-kong-tutorial.git</i>
 > &nbsp;
  
 
@@ -64,7 +65,6 @@
 **6. Did you get help from any online websites, videos, or tutorials?**   
 
 > &nbsp;
-><i>https://www.mariouniverse.com/sprites-nes-dk/</i>
 ><i>https://github.com/zigurous/unity-donkey-kong-tutorial.git</i>
 ><i>https://reddit.com/r/Unity2D/comments/8y75vq/how_do_i_extract_multiple_sprites_from_these/</i>
 ><i>https://docs.unity3d.com/6000.2/Documentation/Manual/sprite/sprite-editor/sprite-editor-landing.html</i>   
