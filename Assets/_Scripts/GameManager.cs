@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,9 +8,23 @@ public class GameManager : MonoBehaviour
     private int lives;
     private bool isLoading = false;
 
+    private static GameManager instance;
+
+    private void Awake()
+    {
+        // Prevent duplicate managers
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
         NewGame();
     }
 
@@ -21,6 +34,7 @@ public class GameManager : MonoBehaviour
         ScoreManager.ResetScore();
         LoadLevel(1);
     }
+
     public void StartNewGame()
     {
         lives = 3;
@@ -36,13 +50,11 @@ public class GameManager : MonoBehaviour
         {
             UIManager ui = FindObjectOfType<UIManager>();
             if (ui != null)
-            {
                 ui.ShowGameOver();
-            }
         }
         else
         {
-            LoadLevel(level);
+            ReloadCurrentLevel();
         }
     }
 
@@ -53,13 +65,9 @@ public class GameManager : MonoBehaviour
         int nextLevel = level + 1;
 
         if (nextLevel < SceneManager.sceneCountInBuildSettings)
-        {
             LoadLevel(nextLevel);
-        }
         else
-        {
             LoadLevel(1);
-        }
     }
 
     private void LoadLevel(int index)
@@ -71,12 +79,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadLevelAsync(int index)
     {
+        // Unload current gameplay scene if one is loaded
         if (SceneManager.sceneCount > 1)
         {
             Scene currentScene = SceneManager.GetSceneAt(1);
             yield return SceneManager.UnloadSceneAsync(currentScene);
         }
 
+        // Load new level additively
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
         yield return asyncLoad;
 
@@ -86,26 +96,30 @@ public class GameManager : MonoBehaviour
         level = index;
         isLoading = false;
     }
+
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+
+        // Stop music for menu
+        FindObjectOfType<MusicManager>()?.StopMusic();
 
         if (SceneManager.sceneCount > 1)
         {
             Scene gameplayScene = SceneManager.GetSceneAt(1);
             if (gameplayScene.isLoaded)
-            {
                 SceneManager.UnloadSceneAsync(gameplayScene);
-            }
         }
 
         lives = 3;
         ScoreManager.ResetScore();
     }
+
     private void ReloadCurrentLevel()
     {
         LoadLevel(level);
     }
+
     public void RestartGame()
     {
         lives = 3;

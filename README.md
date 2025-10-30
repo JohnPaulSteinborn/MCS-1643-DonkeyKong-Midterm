@@ -40,8 +40,9 @@
 **3. Any assets used that you didn't create yourself?**   
 
 > &nbsp;
-><i>https://www.mariouniverse.com/sprites-nes-dk/</i>
-><i>https://github.com/zigurous/unity-donkey-kong-tutorial.git</i>
+><i>https://www.mariouniverse.com/sprites-nes-dk/ for sprites</i>
+><i>https://github.com/zigurous/unity-donkey-kong-tutorial.git for sprites</i>
+><i>https://sfxr.me/ for sound effects</i>
 > &nbsp;
  
 
@@ -57,7 +58,7 @@
 **5. Did you get help from any AI Code Assistants?**   
 
 > &nbsp;
-><i>(Including things like Chat-GPT, Copilot, etc. Tell us which .cs file to look in for the citation and describe what you learned)</i>   
+><i>Used ChatGPT for help with writing the script for the Fireball enemies as well as the UIManager. In doing so I learned how to implement enemy movement and some behavior regarding interacting with game objects. The UIManager taught me how to properly implement menus and restart and reset the game upon a game over.</i>   
 > &nbsp;
  
 
